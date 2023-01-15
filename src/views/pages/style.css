@@ -1,0 +1,349 @@
+/*--------------------- TEST ---------------------*/
+/*--------------------- ---- ---------------------*/
+:root {
+  --success-color: #2691d9;
+  --error-color: #e74c3c;
+  --green-color: #00b14f;
+  --gray-color: rgb(82, 78, 78);
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  align-items: center;
+}
+.layer-login {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.container {
+  width: 60%;
+  height: 100%;
+  padding: 40px;
+}
+.container h1 {
+  text-align: left;
+  padding: 20px 0;
+}
+.container h5 {
+  padding: 5px 0;
+  font-weight: lighter;
+  color: var(--gray-color);
+  font-size: 20px;
+}
+.container .xaydung {
+  color: rgb(136, 135, 135);
+}
+.form-control {
+  width: 100%;
+  position: relative;
+  margin-top: 30px;
+}
+.form-control label {
+  bottom: -20px;
+  display: inline-block;
+  font-size: 17px;
+}
+
+.form-control input {
+  width: 65%;
+  height: 40px;
+  font-size: 16px;
+  outline: none;
+  border: 1px solid rgb(173, 168, 168);
+}
+.form-control input:hover {
+  border: 1px solid black;
+}
+/* .form-control span{
+    border-bottom: 2px solid var(--success-color);
+    position: absolute;
+    top: 70px;
+    left: 0%;
+    width: 0%;
+    transition: 0.3s;
+    
+  }
+  .form-control input:focus ~ span{
+    width: 100%;
+  } */
+.form-control.error small {
+  color: var(--error-color);
+}
+.form-control.error input {
+  border-bottom: 2px solid var(--error-color);
+}
+.btn-submit {
+  width: 65%;
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background: var(--green-color);
+  font-size: 18px;
+  font-weight: bold;
+  margin: 30px 0;
+  cursor: pointer;
+  transition: 0.3s;
+  color: white;
+}
+.btn-submit:hover {
+  background: rgb(103, 230, 103);
+}
+.signup-link a {
+  color: var(--success-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+.signup-link .a2 {
+  margin-left: 12rem;
+}
+.signup-link a:hover {
+  text-decoration: underline;
+}
+.container p {
+  margin: 20px 0;
+  margin-left: 15rem;
+}
+.container .facebook,
+.google,
+.link {
+  text-decoration: none;
+  padding: 10px 47px;
+  font-size: 20px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  align-items: center;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+
+.container .facebook {
+  background: #365899;
+  border-color: #365899;
+}
+.container .google {
+  background: #ea4335;
+  border-color: #ea4335;
+}
+.container .link {
+  background: #056497;
+  border-color: #056497;
+}
+
+.container-right {
+  width: 50%;
+  height: 700px;
+  display: block;
+  align-items: center;
+  background: #eee;
+  position: relative;
+  top: -2px;
+  position: fixed;
+  right: 0;
+}
+.container-right i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 20px;
+}
+.container-right .slider-next {
+  right: 0;
+}
+.container-right ul {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  z-index: 10;
+}
+.container-right ul li {
+  margin: 0 15px;
+  width: 10px;
+  height: 10px;
+  border-radius: 100rem;
+  background-color: #999;
+  cursor: pointer;
+  transition: background-color 0.25s linear;
+}
+.slider-dots li.active {
+  background-color: #a5e2c0;
+}
+.slider-wrapper {
+  width: 55%;
+  height: 550px;
+  overflow: hidden;
+  position: relative;
+  top: 60px;
+  left: 170px;
+}
+.slider-main {
+  display: flex;
+  position: relative;
+  transition: transform 0.25s linear;
+  height: 100%;
+}
+.slider-item {
+  height: 100%;
+  width: 50%;
+  flex: 1 0 100%;
+  user-select: none;
+}
+.slider-item .image h3,
+h4 {
+  margin: 20px 40px;
+}
+
+.container {
+  width: 60%;
+  height: 100%;
+  padding: 40px;
+  margin-left: 50px;
+}
+.container h1 {
+  text-align: left;
+  padding: 20px 0;
+  color: rgb(15, 15, 15);
+  font-size: 27px;
+}
+.container h4 {
+  text-align: left;
+  color: rgb(138, 135, 135);
+  font-weight: lighter;
+  width: 80%;
+}
+
+.form-control {
+  width: 80%;
+  position: relative;
+  margin-top: 20px;
+}
+.form-control h5 {
+  padding: 5px 0;
+  font-weight: lighter;
+  color: var(--gray-color);
+  font-size: 20px;
+}
+.form-control input {
+  width: 100%;
+  height: 40px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  border: 1px solid rgb(218, 213, 213);
+}
+.form-control input:hover {
+  border: 1px solid var(--gray-color);
+}
+
+.form-control.error small {
+  color: var(--error-color);
+}
+.form-control.error input {
+  border-bottom: 2px solid var(--error-color);
+}
+.btn-submit {
+  width: 80%;
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background: var(--green-color);
+  font-size: 18px;
+  font-weight: bold;
+  margin: 20px 0;
+  cursor: pointer;
+  transition: 0.3s;
+  color: white;
+}
+.btn-submit:hover {
+  background: rgb(103, 230, 103);
+}
+.signup-link {
+  position: absolute;
+  left: 15%;
+}
+.signup-link a {
+  color: var(--success-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+.container-right {
+  width: 50%;
+  height: 100%;
+  display: block;
+  align-items: center;
+  background: #d0a2a2a5;
+  position: relative;
+}
+.container-right .image-item {
+  margin-top: 50px;
+  transform: translateX(-75%);
+}
+.image-title {
+  font-size: 25px;
+  margin-top: 30px;
+  margin-left: 10%;
+}
+.image-title-dow {
+  padding: 40px 0;
+  color: rgb(61, 61, 61);
+  width: 40%;
+  margin-left: 10%;
+}
+button:hover {
+  background: #d0a2a292;
+}
+.slick-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1%;
+  z-index: 2;
+  background: #d0a2a202;
+  border: none;
+  font-size: 25px;
+  width: 30px;
+  height: 50px;
+}
+.slick-prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 1%;
+  z-index: 2;
+  background: #d0a2a200;
+  border: none;
+  font-size: 25px;
+  width: 30px;
+  height: 50px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
