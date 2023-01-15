@@ -14,6 +14,7 @@ export const TYPE_PROVIDER = {
 /* -------------- NAVIGATION -------------- */
 export const NAVIGATION = {
   HOME: "/",
+  CV_GENERATOR: "/cv-generator",
   // Auth
   SIGN_IN: "/auth/sign-in",
   SIGN_UP: "/auth/sign-up",

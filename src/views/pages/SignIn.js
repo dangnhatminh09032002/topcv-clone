@@ -30,17 +30,17 @@ export default function SignIn() {
   });
 
   // -- HANDLER -- //
-  const doSignIn = async (event) => {
+  const doSignIn = (event) => {
     event.preventDefault();
-    await signInWithEmailAndPassword(email, password);
+    signInWithEmailAndPassword(email, password);
   };
 
-  const doLoginWithGoogle = async (event) => {
-    await signInWithGoogle();
+  const doLoginWithGoogle = (event) => {
+    signInWithGoogle();
   };
 
-  const doLoginWithFacebook = async (event) => {
-    await signInWithFacebook();
+  const doLoginWithFacebook = (event) => {
+    signInWithFacebook();
   };
 
   // -- EFFECT -- //
@@ -90,7 +90,7 @@ export default function SignIn() {
           <button
             type="submit"
             className="facebook"
-            onClick={doLoginWithGoogle}
+            onClick={doLoginWithFacebook}
             disabled={authState.isFetching}
           >
             <i className="bx bxl-facebook-square" />

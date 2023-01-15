@@ -18,6 +18,7 @@ const SignUp = lazy(() => import("../views/pages/SignUp"));
 const Error = lazy(() => import("../views/pages/Error"));
 const Dashboard = lazy(() => import("../views/dashboard"));
 const ManageAccount = lazy(() => import("../views/manageAccount"));
+const CVGenerator = lazy(() => import("../views/cvGenerator"));
 
 // Form Router
 const publicRoutes = [
@@ -44,6 +45,12 @@ const publicRoutes = [
     exact: true,
     name: "",
     element: <Error />,
+  },
+  {
+    path: NAVIGATION.CV_GENERATOR,
+    exact: true,
+    name: "",
+    element: <CVGenerator />,
   },
 ];
 

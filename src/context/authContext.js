@@ -81,10 +81,7 @@ export default function AuthProvider({ children }) {
         });
         setAuthState({ ...authState, currentUser: user });
       })
-      .catch((error) => {
-        setAuthState({ ...authState, errorMessage: error.message });
-        return error;
-      })
+      .catch((error) => {})
       .finally(() => {
         setAuthState({ ...authState, isFetching: false });
       });
@@ -106,7 +103,7 @@ export default function AuthProvider({ children }) {
         setAuthState({ ...authState, currentUser: user });
       })
       .catch((error) => {
-        setAuthState({ ...authState, errorMessage: error.message });
+        // setAuthState({ ...authState, errorMessage: error.message });
       })
       .finally(() => {
         setAuthState({ ...authState, isFetching: false });
