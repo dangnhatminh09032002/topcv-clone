@@ -1,17 +1,16 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box, Button, Avatar, IconButton } from "@mui/material";
 import { PhotoCamera } from "@mui/icons-material";
 import jsPDF from "jspdf";
 
-import MyEditor from "./myEditor";
-
-import "./style.css";
+import MyEditor from "./myPdf";
 
 export default function CVGenerator() {
   const [fileImage, setFileImage] = useState(null);
 
   const generatePDF = (e) => {
-    const doc = new jsPDF("p", "pt", "a4");
+    const doc = new jsPDF("portrait", "pt", "a4");
+    doc.setFont("san-serif", "normal");
     doc.html(document.querySelector("#cv-template"), {
       callback: (pdf) => {
         pdf.save("mypdf.pdf");
