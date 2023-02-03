@@ -1,10 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
-import { RichUtils, Modifier, EditorState } from "draft-js";
+import { RichUtils } from "draft-js";
 import jsPDF from "jspdf";
 
-import { Box, IconButton, Button } from "@mui/material";
-
+import {
+  Box,
+  IconButton,
+  Button,
+  Popover,
+  List,
+  ListItem,
+  ListItemButton,
+} from "@mui/material";
+import ColorPicker from "material-ui-color-picker";
 import {
   FormatBold,
   FormatItalic,
@@ -13,36 +21,28 @@ import {
 
 import { CvGeneratorContext } from "../../context/cvGeneratorContext";
 
-const FONT_SIZE = {
-  FONT_SIZE_10: { label: "10px", style: "FONT_SIZE_10" },
-  FONT_SIZE_12: { label: "12px", style: "FONT_SIZE_12" },
-  FONT_SIZE_14: { label: "14px", style: "FONT_SIZE_14" },
-  FONT_SIZE_16: { label: "16px", style: "FONT_SIZE_16" },
-  FONT_SIZE_18: { label: "18px", style: "FONT_SIZE_18" },
-  FONT_SIZE_20: { label: "20px", style: "FONT_SIZE_20" },
-};
-
-const INLINE_STYLES = {
-  BOLD: { style: "BOLD", icon: <FormatBold /> },
-  ITALIC: { style: "ITALIC", icon: <FormatItalic /> },
-  UNDERLINE: { style: "UNDERLINE", icon: <FormatUnderlined /> },
-};
-
-const STYLE_MAP = {
-  // font size
-  FONT_SIZE_10: { fontSize: "10px" },
-  FONT_SIZE_12: { fontSize: "12px" },
-  FONT_SIZE_16: { fontSize: "16px" },
-  FONT_SIZE_18: { fontSize: "18px" },
-  FONT_SIZE_20: { fontSize: "20px" },
-  FONT_SIZE_22: { fontSize: "22px" },
-  FONT_SIZE_24: { fontSize: "24px" },
-  FONT_SIZE_26: { fontSize: "26px" },
-  FONT_SIZE_28: { fontSize: "28px" },
-  FONT_SIZE_30: { fontSize: "30px" },
+const CircleBox = (props) => {
+  return (
+    <Box
+      sx={{
+        width: "15px",
+        height: "15px",
+        borderRadius: "50%",
+        border: "1px solid #c5c5c5",
+        m: "6px",
+        backgroundColor: props.color || "#000",
+      }}
+      {...props}
+    />
+  );
 };
 
 export default function BlockEditToolbar({ element = null }) {
+  const [colorPopover, setColorPopover] = useState({
+    color: "#000",
+  });
+  const [fontSizePopover, setFontSizePopover] = useState(null);
+
   const cvGeneratorProvider = useContext(CvGeneratorContext);
   const { cvGeneratorState } = cvGeneratorProvider;
 
@@ -56,49 +56,31 @@ export default function BlockEditToolbar({ element = null }) {
     });
   };
 
-  const _changFontSize = (inlineStyle) => {
-    if (FONT_SIZE[inlineStyle]) {
-      element?.current._changeStatePublic((editorState) => {
-        const selection = editorState.getSelection();
-
-        // Let's just allow one color at a time. Turn off all active colors.
-        const nextContentState = Object.keys(STYLE_MAP).reduce(
-          (contentState, font) => {
-            return Modifier.removeInlineStyle(contentState, selection, font);
-          },
-          editorState.getCurrentContent()
-        );
-
-        let nextEditorState = EditorState.push(
-          editorState,
-          nextContentState,
-          "change-inline-style"
-        );
-
-        const currentStyle = editorState.getCurrentInlineStyle();
-
-        if (selection.isCollapsed()) {
-          nextEditorState = currentStyle.reduce((state, color) => {
-            return RichUtils.toggleInlineStyle(state, color);
-          }, nextEditorState);
-        }
-
-        if (!currentStyle.has(FONT_SIZE[inlineStyle])) {
-          nextEditorState = RichUtils.toggleInlineStyle(
-            nextEditorState,
-            FONT_SIZE[inlineStyle]
-          );
-        }
-
-        return nextEditorState;
-      });
+  const _changeColor = (newColor) => {
+    if (!cvGeneratorState) return;
+    if (newColor) {
+      setColorPopover({ ...colorPopover, color: newColor });
+      return;
     }
+
+    // add new style
+    cvGeneratorState.current.changeStyleMap((state, setStyleMap) => {
+      const newStyleMap = { ...state.styleMap };
+      newStyleMap[colorPopover.color] = colorPopover;
+      setStyleMap(newStyleMap);
+    });
+
+    cvGeneratorState.current.changeEditorState((state, setEditorState) => {
+      setEditorState(
+        RichUtils.toggleInlineStyle(state.editorState, colorPopover.color)
+      );
+    });
   };
 
   const _changeInlineStyle = (inlineStyle) => {
     if (INLINE_STYLES[inlineStyle] && cvGeneratorState) {
-      cvGeneratorState.current.changeState((state, onChange) => {
-        onChange(
+      cvGeneratorState.current.changeEditorState((state, setEditorState) => {
+        setEditorState(
           RichUtils.toggleInlineStyle(
             state.editorState,
             INLINE_STYLES[inlineStyle].style
@@ -108,9 +90,35 @@ export default function BlockEditToolbar({ element = null }) {
     }
   };
 
+  const _changeFontSize = (size) => {
+    if (!cvGeneratorState) return;
+
+    const fontSize = `font-size_${size}`;
+
+    // add new style
+    cvGeneratorState.current.changeStyleMap((state, setStyleMap) => {
+      const newStyleMap = { ...state.styleMap };
+      newStyleMap[fontSize] = { fontSize: size };
+      setStyleMap(newStyleMap);
+    });
+
+    // change style
+    cvGeneratorState.current.changeEditorState((state, setEditorState) => {
+      const { editorState } = state;
+      setEditorState(RichUtils.toggleInlineStyle(editorState, fontSize));
+    });
+  };
+
   return (
-    <Box>
-      <Box>
+    <Box
+      display={"flex"}
+      justifyContent={"center"}
+      alignItems={"center"}
+      p={"5px"}
+      mb={"5px"}
+      backgroundColor={"white"}
+    >
+      <Box sx={{ mx: 1 }}>
         {Object.values(INLINE_STYLES).map((value, indx) => (
           <IconButton
             key={indx}
@@ -119,8 +127,69 @@ export default function BlockEditToolbar({ element = null }) {
             {value.icon}
           </IconButton>
         ))}
-        <Button onClick={generatePDF}>Convert PDF</Button>
+      </Box>
+      <Box sx={{ mx: 1 }}>
+        <CircleBox
+          onClick={() => {
+            const colorPicker = document.getElementById("color-picker");
+            colorPicker.click();
+          }}
+          color={colorPopover.color}
+        />
+        <ColorPicker
+          id="color-picker"
+          name="color"
+          onChange={_changeColor}
+          style={{ display: "none" }}
+        />
+      </Box>
+      <Box sx={{ mx: 1 }}>
+        <Button
+          variant="contained"
+          onClick={(e) => setFontSizePopover(e.currentTarget)}
+        >
+          Font Size
+        </Button>
+        <Popover
+          open={Boolean(fontSizePopover)}
+          anchorEl={fontSizePopover}
+          onClose={() => setFontSizePopover(null)}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "center",
+          }}
+        >
+          <List>
+            <ListItem disablePadding>
+              {FONT_SIZE.map((size, indx) => (
+                <ListItemButton
+                  key={indx}
+                  onClick={() => _changeFontSize(size)}
+                >
+                  {size}
+                </ListItemButton>
+              ))}
+            </ListItem>
+          </List>
+        </Popover>
+      </Box>
+      <Box sx={{ mx: 1 }}>
+        <Button variant="contained" onClick={generatePDF}>
+          Convert PDF
+        </Button>
       </Box>
     </Box>
   );
 }
+
+const FONT_SIZE = ["12px", "14px", "16px", "18px", "24px", "32px"];
+
+const INLINE_STYLES = {
+  BOLD: { style: "BOLD", icon: <FormatBold /> },
+  ITALIC: { style: "ITALIC", icon: <FormatItalic /> },
+  UNDERLINE: { style: "UNDERLINE", icon: <FormatUnderlined /> },
+};

@@ -1,4 +1,4 @@
-import React, { Component, useContext, useRef } from "react";
+import React, { useContext, useRef } from "react";
 import RichTextEdit from "./RichTextEdit";
 import { Box } from "@mui/material";
 import { List } from "@mui/material";

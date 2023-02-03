@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import { Box, Button } from "@mui/material";
+import React from "react";
+import { Box } from "@mui/material";
 import { Grid } from "@mui/material";
 
 import AvatarEdit from "../components/resume/Avatar";
@@ -14,8 +14,6 @@ import Certificate from "../components/resume/Certificate";
 import Activitie from "../components/resume/Activitie";
 
 export default function CVGenerator() {
-  const [refElement, setRefElement] = useState(null);
-
   return (
     <React.Fragment>
       <Box
@@ -25,7 +23,7 @@ export default function CVGenerator() {
           backgroundColor: "#f1f2f6",
         }}
       >
-        <BlockEditToolbar element={refElement} />
+        <BlockEditToolbar />
         <Box id="cv-template" sx={STYLE_CSS.CVTemplate}>
           <Grid container>
             <Grid item md={4} border={STYLE_CSS.borderDef}>

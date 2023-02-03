@@ -48,14 +48,20 @@ export default function PersonalInformation() {
   return (
     <Box>
       <GreenLine />
-      <RichTextEdit editorProps={{ placeholder: "Thông tin cá nhân" }} />
+      <RichTextEdit
+        ref={refs.infoRef}
+        editorProps={{
+          placeholder: "Thông tin cá nhân",
+          onFocus: onFocus("infoRef"),
+        }}
+      />
       <GreenLine />
       <Box>
         <List sx={STYLE_CSS.hoverEvent}>
           <ListItem disablePadding sx={STYLE_CSS.hoverEvent}>
             {/* <EmailIcon color="success" sx={{ fontSize: 20 }} /> */}
             <RichTextEdit
-              ref={refs.infoRef}
+              ref={refs.emailRef}
               editorProps={{
                 placeholder: "Email",
                 onFocus: onFocus("emailRef"),
