@@ -4,6 +4,7 @@ import { NAVIGATION } from "../services/constants";
 
 // Setup layout
 import VerticalLayout from "../layout/VerticalLayout";
+import DefaultLayout from "../layout/DefaultLayout";
 
 const GetLayout = (Element) => (
   <VerticalLayout>
@@ -16,6 +17,8 @@ const Home = lazy(() => import("../views/pages/Home"));
 const SignIn = lazy(() => import("../views/pages/SignIn"));
 const SignUp = lazy(() => import("../views/pages/SignUp"));
 const Error = lazy(() => import("../views/pages/Error"));
+const Vip = lazy(() => import("../views/pages/Vip"));
+const CVTemplate = lazy(() => import("../views/pages/CVTemplate"));
 const Dashboard = lazy(() => import("../views/dashboard"));
 const ManageAccount = lazy(() => import("../views/manageAccount"));
 const CVGenerator = lazy(() => import("../views/cvGenerator"));
@@ -26,19 +29,47 @@ const publicRoutes = [
     path: NAVIGATION.HOME,
     exact: true,
     name: "",
-    element: <Home />,
+    element: (
+      <DefaultLayout>
+        <Home />
+      </DefaultLayout>
+    ),
   },
   {
     path: NAVIGATION.SIGN_IN,
     exact: true,
     name: "",
-    element: <SignIn />,
+    element: (
+      <DefaultLayout>
+        <SignIn />
+      </DefaultLayout>
+    ),
   },
   {
     path: NAVIGATION.SIGN_UP,
     exact: true,
     name: "",
-    element: <SignUp />,
+    element: (
+      <DefaultLayout>
+        <SignUp />
+      </DefaultLayout>
+    ),
+  },
+  {
+    path: NAVIGATION.VIP,
+    exact: true,
+    name: "",
+    element: (
+      <DefaultLayout>
+        <Vip />
+      </DefaultLayout>
+    ),
+  },
+  {
+    path: NAVIGATION.CV_TEMPLATE,
+    exact: true,
+    name: "",
+    element: <DefaultLayout>{<CVTemplate />}</DefaultLayout>,
   },
   {
     path: NAVIGATION.ERROR,
@@ -50,7 +81,7 @@ const publicRoutes = [
     path: NAVIGATION.CV_GENERATOR,
     exact: true,
     name: "",
-    element: <CVGenerator />,
+    element: <DefaultLayout>{<CVGenerator />}</DefaultLayout>,
   },
 ];
 

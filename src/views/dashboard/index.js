@@ -3,7 +3,7 @@ import { tokens } from "../../theme";
 
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 
-import Header from "../components/Header";
+import Header from "./Header";
 
 const Dashboard = () => {
   const theme = useTheme();

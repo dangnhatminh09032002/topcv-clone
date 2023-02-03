@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import "../style.css";
+import "../../../assets/styles/global.css";
 
 export default class Layer4 extends Component {
   render() {

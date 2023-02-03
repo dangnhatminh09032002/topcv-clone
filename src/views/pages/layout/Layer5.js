@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 
-import "../style.css";
+import "../../../assets/styles/global.css";
+import app1 from "./../../../assets/images/chplay.png";
+import app2 from "./../../../assets/images/app_store.png";
+import ip from "./../../../assets/images/app-download.png";
 
 export default class Layer5 extends Component {
   render() {
@@ -26,12 +29,12 @@ export default class Layer5 extends Component {
             </div>
             <h4>Tải ứng dụng tìm việc ngay</h4>
             <div className="app-dowload">
-              <img src={this.props.app1} alt="" />
-              <img src={this.props.app2} alt="" />
+              <img src={app1} alt="" />
+              <img src={app2} alt="" />
             </div>
           </div>
           <div className="ip">
-            <img src={this.props.ip} alt="" />
+            <img src={ip} alt="" />
           </div>
         </div>
       </div>

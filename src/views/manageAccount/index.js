@@ -6,7 +6,7 @@ import AddIcon from "@mui/icons-material/Add";
 
 import { tokens } from "../../theme";
 import { mockDataTeam } from "../../data/mockData";
-import Header from "../components/Header";
+import Header from "../dashboard/Header";
 import { UserContext } from "../../context/userContext";
 
 const ManageAccount = () => {

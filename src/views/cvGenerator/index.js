@@ -1,93 +1,115 @@
-import React, { useState } from "react";
-import { Box, Button, Avatar, IconButton } from "@mui/material";
-import { PhotoCamera } from "@mui/icons-material";
-import jsPDF from "jspdf";
+import React, { useState, useRef } from "react";
+import { Box, Button } from "@mui/material";
+import { Grid } from "@mui/material";
 
-import MyEditor from "./myPdf";
+import AvatarEdit from "../components/resume/Avatar";
+import BlockEditToolbar from "../components/BlockEditToolbar";
+import ResumHeader from "../components/resume/ResumHeader";
+import PersonalInformation from "../components/resume/PersonalInformation";
+import Education from "../components/resume/Education";
+import Skill from "../components/resume/Skill";
+import Experience from "../components/resume/Experience";
+import Project from "../components/resume/Project";
+import Certificate from "../components/resume/Certificate";
+import Activitie from "../components/resume/Activitie";
 
 export default function CVGenerator() {
-  const [fileImage, setFileImage] = useState(null);
-
-  const generatePDF = (e) => {
-    const doc = new jsPDF("portrait", "pt", "a4");
-    doc.setFont("san-serif", "normal");
-    doc.html(document.querySelector("#cv-template"), {
-      callback: (pdf) => {
-        pdf.save("mypdf.pdf");
-      },
-    });
-  };
-
-  const handleUploadClick = (e) => {
-    if (e.target.files && e.target.files.length > 0)
-      setFileImage(e.target.files[0]);
-  };
+  const [refElement, setRefElement] = useState(null);
 
   return (
     <React.Fragment>
-      <Button onClick={generatePDF}>Convert PDF</Button>
       <Box
-        id="cv-template"
         sx={{
-          width: 595,
-          height: 841,
-          margin: "auto",
-          border: "2px solid #000000",
-          display: "flex",
-          justifyContent: "center",
+          paddingTop: "168px",
+          paddingBottom: "20px",
+          backgroundColor: "#f1f2f6",
         }}
       >
-        <Box
-          sx={{
-            width: "50%",
-            height: "100%",
-            background: "blue",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <Box
-            sx={{
-              width: "100%",
-              height: 250,
-              padding: "10px",
-              borderTop: "2px solid transparent",
-              borderBottom: "2px solid transparent",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Box
-              sx={{
-                border: "2px solid black",
-              }}
-            >
-              <Avatar
-                alt="Remy Sharp"
-                variant="square"
-                src={(fileImage && URL.createObjectURL(fileImage)) || null}
-                sx={{
-                  width: 200,
-                  height: 200,
-                }}
-              >
-                <IconButton
-                  color="primary"
-                  aria-label="upload picture"
-                  component="label"
-                >
-                  <input hidden type="file" onChange={handleUploadClick} />
-                  <PhotoCamera />
-                </IconButton>
-              </Avatar>
-            </Box>
-          </Box>
-        </Box>
-        <Box sx={{ width: "50%", height: "100%", background: "red" }}>
-          <MyEditor />
+        <BlockEditToolbar element={refElement} />
+        <Box id="cv-template" sx={STYLE_CSS.CVTemplate}>
+          <Grid container>
+            <Grid item md={4} border={STYLE_CSS.borderDef}>
+              <Box sx={STYLE_CSS.padding_10}>
+                <Box sx={{ ...STYLE_CSS.flexBox, ...STYLE_CSS.hoverEvent }}>
+                  <AvatarEdit />
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item md={8} border={STYLE_CSS.borderDef}>
+              <Box sx={STYLE_CSS.padding_10}>
+                <ResumHeader />
+              </Box>
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item md={4} border={STYLE_CSS.borderDef}>
+              <Box sx={STYLE_CSS.padding_10}>
+                <PersonalInformation />
+              </Box>
+            </Grid>
+            <Grid item md={4} border={STYLE_CSS.borderDef}>
+              <Box sx={STYLE_CSS.padding_10}>
+                <Education />
+              </Box>
+            </Grid>
+            <Grid item md={4} border={STYLE_CSS.borderDef}>
+              <Box sx={STYLE_CSS.padding_10}>
+                <Skill />
+              </Box>
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item md={12} border={STYLE_CSS.borderDef}>
+              <Box sx={STYLE_CSS.padding_10}>
+                <Experience />
+              </Box>
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item md={12} border={STYLE_CSS.borderDef}>
+              <Box sx={STYLE_CSS.padding_10}>
+                <Project />
+              </Box>
+            </Grid>
+          </Grid>
+          <Grid container>
+            <Grid item md={6} border={STYLE_CSS.borderDef}>
+              <Box sx={STYLE_CSS.padding_10}>
+                <Certificate />
+              </Box>
+            </Grid>
+            <Grid item md={6} border={STYLE_CSS.borderDef}>
+              <Box sx={STYLE_CSS.padding_10}>
+                <Activitie />
+              </Box>
+            </Grid>
+          </Grid>
         </Box>
       </Box>
     </React.Fragment>
   );
 }
+
+const STYLE_CSS = {
+  padding_10: {
+    width: "100%",
+    padding: "10px",
+  },
+  hoverEvent: {
+    border: "1px solid #c5c5c5",
+    ":hover": { border: `1px solid ${"green"}` },
+  },
+  flexBox: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  borderDef: "1px solid #c5c5c5",
+  CVTemplate: {
+    width: 595,
+    minHeight: 841,
+    margin: "auto",
+    backgroundColor: "white",
+  },
+};
