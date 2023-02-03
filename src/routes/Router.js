@@ -6,6 +6,7 @@ import { firebaseService, userService } from "../services";
 import { AuthContext } from "../context/authContext";
 import { getRoutesByRole } from "./formRoutes";
 import { NAVIGATION } from "../services/constants";
+import { Loading } from "../index";
 
 // Setup layout
 
@@ -26,7 +27,7 @@ const Router = () => {
     });
   }, []);
 
-  if (authState.loadingInit) return <h1>-- Loading --</h1>;
+  if (authState.loadingInit) return <Loading />;
   return (
     <Routes>
       {routes.map((r, indx) => (

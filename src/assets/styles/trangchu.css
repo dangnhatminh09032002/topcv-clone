@@ -285,7 +285,7 @@ header .navbar a:hover {
   /* background-color: white; */
   display: flex;
   margin-top: 9.5rem;
-  background-image: url(../img/layer1.png);
+  background-image: url(../images/layer1.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }

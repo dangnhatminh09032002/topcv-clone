@@ -80,6 +80,7 @@ export default function AuthProvider({ children }) {
           emailVerified: userProvider.emailVerified,
         });
         setAuthState({ ...authState, currentUser: user });
+        document.location.reload();
       })
       .catch((error) => {})
       .finally(() => {
@@ -101,6 +102,7 @@ export default function AuthProvider({ children }) {
           emailVerified: userProvider.emailVerified,
         });
         setAuthState({ ...authState, currentUser: user });
+        document.location.reload();
       })
       .catch((error) => {
         // setAuthState({ ...authState, errorMessage: error.message });

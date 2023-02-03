@@ -8,7 +8,10 @@ import { red } from "@mui/material/colors";
 import { AuthContext } from "../../context/authContext";
 import { NAVIGATION } from "../../services/constants";
 
-import "./style.css";
+import "../../assets/styles/dangnhap.css";
+import img1 from "../../assets/images/img1.png";
+import img2 from "../../assets/images/img2.png";
+import img3 from "../../assets/images/img3.png";
 
 export default function SignIn() {
   // -- PROP AND DEFAULT-- //
@@ -143,7 +146,7 @@ export default function SignIn() {
           <div className="slider-main">
             <div className="slider-item active">
               <div className="image">
-                <img src="./img/img1.png" alt="" />
+                <img src={img1} alt="" />
                 <h3 className="image-title">Bảo mật &amp; An toàn tuyệt đối</h3>
                 <h4 className="image-title-dow">
                   Bạn có thể chủ động bật / tắt trạng thái tìm việc. Nếu trạng
@@ -153,7 +156,7 @@ export default function SignIn() {
             </div>
             <div className="slider-item">
               <div className="image">
-                <img src="./img/img2.png" alt="" />
+                <img src={img2} alt="" />
                 <h3 className="image-title">Hỗ trợ Người tìm việc</h3>
                 <h4 className="image-title-dow">
                   Nhà tuyển dụng chủ động tìm kiếm và liên hệ với bạn qua hệ
@@ -163,7 +166,7 @@ export default function SignIn() {
             </div>
             <div className="slider-item">
               <div className="image">
-                <img src="./img/img3.png" alt="" />
+                <img src={img3} alt="" />
                 <h3 className="image-title">Công cụ viết CV đẹp Miễn phí</h3>
                 <h4 className="image-title-dow">
                   Nhiều mẫu CV đẹp, phù hợp nhu cầu ứng tuyển các vị trí khác
@@ -179,11 +182,3 @@ export default function SignIn() {
     </div>
   );
 }
-
-// <React.Fragment>
-//   <form onSubmit={handleSubmit}>
-//     <input id="email" type="email" placeholder="email"></input>
-//     <input id="password" type="password" placeholder="password"></input>
-//     <button type="submit">submit</button>
-//   </form>
-// </React.Fragment>

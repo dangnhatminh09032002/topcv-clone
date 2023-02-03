@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 
-import "../style.css";
+import "../../../assets/styles/global.css";
+
+import upload1 from "./../../../assets/images/mau_cv.png";
+import upload2 from "./../../../assets/images/upload-cv.png";
 
 export default class Layer2 extends Component {
   render() {
@@ -19,7 +22,7 @@ export default class Layer2 extends Component {
             </button>
           </div>
           <div className="img-1">
-            <img src={this.props.upload1} alt="" />
+            <img src={upload1} alt="" />
           </div>
         </div>
         <div className="tao-cv upload">
@@ -38,7 +41,7 @@ export default class Layer2 extends Component {
             </button>
           </div>
           <div className="img-1">
-            <img src={this.props.upload2} alt="" />
+            <img src={upload2} alt="" />
           </div>
         </div>
       </div>
