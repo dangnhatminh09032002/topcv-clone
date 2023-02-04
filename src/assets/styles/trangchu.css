@@ -8,7 +8,6 @@
   outline: none;
   border: none;
   text-decoration: none;
-  text-transform: capitalize;
 }
 :root {
   --success-color: #2691d9;
